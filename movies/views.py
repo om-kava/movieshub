@@ -106,3 +106,4 @@ def movies_api(request):
         })
 
     return JsonResponse(data, safe=False)
+
