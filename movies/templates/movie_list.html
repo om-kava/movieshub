@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>My Movies</h2>
+<form method="get" style="margin-bottom: 20px;">
+    <input 
+        type="text" 
+        name="q" 
+        placeholder="Search movie by title..."
+        value="{{ query|default:'' }}"
+    >
+    <button type="submit">Search</button>
+</form>
+
+{% if movies %}
+    <ul>
+        {% for movie in movies %}
+            <li>
+                <strong>{{ movie.title }}</strong><br>
+                {{ movie.description }}<br>
+                Release Date: {{ movie.release_date }}<br>
+                <a href="{% url 'update_movie' movie.id %}">Edit</a> |
+                <a href="{% url 'delete_movie' movie.id %}" onclick="return confirm('Are you sure?')">Delete</a>
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No movies added yet.</p>
+{% endif %}
+{% endblock %}
